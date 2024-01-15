@@ -24,22 +24,24 @@ namespace DieRoller
 		/// True if the die is currently held
 		/// </summary>
 		public bool IsHeld { get; set; }
-	
 
 
-        /// <summary>
+
+		/// <summary>
 		/// Rolls the die and sets the <see cref="FaceValue"/>
-		/// to the new number. Returns the new value
-		/// <return> Returns the new random number</return>
+		/// to the new number if the die is not currently held. Returns the new value
+		/// <return> Returns the <see cref="FaceValue"/></return>
 		/// </summary>
 		public byte Roll()
 		{
-			// Generate a random number
-			Random random = new();
-			byte newValue = (byte)random.Next(1, 7);
+			if (!IsHeld)
+			{
+				// Generate a random number
+				Random random = new();
+				byte newValue = (byte)random.Next(1, 7);
 
-			FaceValue = newValue;
-
+				FaceValue = newValue;
+			}
 			return FaceValue;
 		}
     }
